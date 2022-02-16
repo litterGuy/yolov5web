@@ -3,5 +3,4 @@
 venv/*
 *.pyc
 backend/logs/*
-backend/dist/*
 *.pt
