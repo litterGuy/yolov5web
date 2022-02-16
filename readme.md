@@ -57,6 +57,12 @@ docker build -t yolov5web:latest .
 docker run -itd --rm -p 8091:8091 --name yolov5web yolov5web:latest 
 ```  
 
+> 提交代码时，把.cache目录下的yolov5和模型pt文件删除掉了。所以建议，docker打包前、最好本地先运行一下项目，
+>
+> 会自动把上述两个文件下载到本地，节约构建时间。
+>
+> 构建出的镜像很大，耗时还长。镜像大小在6G+
+
 ```shell script
 # 从 dockerhub pull
 docker pull litterguy/yolov5web:latest
