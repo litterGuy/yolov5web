@@ -61,7 +61,7 @@ docker run -itd --rm -p 8091:8091 --name yolov5web yolov5web:latest
 >
 > 会自动把上述两个文件下载到本地，节约构建时间。
 >
-> 构建出的镜像很大，耗时还长。镜像大小在6G+
+> 构建出的镜像很大，耗时还长、大概花了45分钟左右。镜像大小在6G+
 
 ```shell script
 # 从 dockerhub pull
