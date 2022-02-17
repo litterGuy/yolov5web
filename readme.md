@@ -6,6 +6,23 @@
 
 并且提供了易于使用的web页面，便于调试或日常使用。
 
+
+## 注意
+
+因希望运行时获取最新的代码，所以提交代码时，把.cache目录下的yolov5和模型pt文件删除掉了。
+
+项目运行时，为了启动速度又使用的本地缓存yolov5代码。文件[yolov5_model_init.py](backend/yolov5_model_init.py):
+```python
+# 因为下载实在太慢，从本地加载yolov5
+if os.path.exists('../.cache/ultralytics_yolov5_master'):
+    model = torch.hub.load('../.cache/ultralytics_yolov5_master', 'custom', path='yolov5s.pt',
+                       source='local')  # or yolov5m, yolov5l, yolov5x, custom
+else:
+    model = torch.hub.load('ultralytics/yolov5', 'yolov5s')  # or yolov5m, yolov5l, yolov5x, custom
+```
+
+所以建议，docker打包前、最好本地先运行一下项目。会自动把上述两个文件下载到本地，节约构建时间和镜像的运行时间。
+
 > 构建镜像很慢，大概花了45分钟。
 >
 > 镜像很大，最终大小为6.23GB
@@ -62,11 +79,6 @@ docker build -t yolov5web:latest .
 # 运行镜像
 docker run -itd --rm -p 8091:8091 --name yolov5web yolov5web:latest 
 ```  
-
-> 提交代码时，把.cache目录下的yolov5和模型pt文件删除掉了。所以建议，docker打包前、最好本地先运行一下项目，
->
-> 会自动把上述两个文件下载到本地，节约构建时间。
->
 
 ```shell script
 # 从 dockerhub pull
